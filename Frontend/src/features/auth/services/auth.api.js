@@ -1,10 +1,11 @@
 import axiosInstance from '../api/axiosInstance'
 
-export async function registerUser(username, email, password){
+export async function registerUser(username, email, password, role){
     const response = await axiosInstance.post('/api/auth/register', {
         username,
         email,
-        password
+        password,
+        role
     })
     return response.data 
 }

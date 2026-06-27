@@ -4,7 +4,7 @@ async function postJob(req, res) {
     try {
         const { title, description, location, requirements, company, postedBy } = req.body
 
-        if (!title || !description || !location || !requirements || !company || !postedBy) {
+        if (!title || !description || !location || !requirements || !company) {
             return res.status(400).json({
                 message: "All fields are required to post a Job"
             })

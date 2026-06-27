@@ -1,22 +1,23 @@
-import { axiosInstance } from "../api/axiosInstance";
+import axiosInstance  from "../api/axiosInstance";
 
-export async function postJob(title, description, location, requirements, company){
-    const response = await axiosInstance.post(`/api/auth/postjob`,{
+export async function postJob(title, description, location, requirements, company, role){
+    const response = await axiosInstance.post(`/api/jobs/postjob`,{
         title, 
         description, 
         location, 
         requirements, 
-        company
+        company,
+        role
     })
     return response.data
 }
 
 export async function getJob(){
-    const response = await axiosInstance.get('/api/auth/getjob')
+    const response = await axiosInstance.get('/api/jobs/getjob')
     return response.data
 }
 
 export async function deleteJob(id){
-    const response = await axiosInstance.delete(`/api/auth/deletejob/${id}`)
+    const response = await axiosInstance.delete(`/api/jobs/deletejob/${id}`)
     return response.data
 }
