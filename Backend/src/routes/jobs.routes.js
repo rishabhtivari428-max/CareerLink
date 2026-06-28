@@ -6,7 +6,7 @@ const { identifyUser, authorizeRole } = require('../middleware/auth.middleware')
 
 jobRouter.post('/postjob', identifyUser, authorizeRole('Recruiter', 'Admin'), postJob)
 
-jobRouter.get('/getjob', identifyUser, authorizeRole('Recruiter', 'Admin'), getJobs)
+jobRouter.get('/getjob', identifyUser, authorizeRole('Recruiter', 'Admin', 'Applicant'), getJobs)
 
 jobRouter.delete('/deletejob/:id', identifyUser, authorizeRole('Recruiter', 'Admin'), deleteJobs)
 

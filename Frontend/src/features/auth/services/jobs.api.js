@@ -1,12 +1,13 @@
 import axiosInstance  from "../api/axiosInstance";
 
-export async function postJob(title, description, location, requirements, company, role){
+export async function postJob(title, description, location, requirements, company, Salary, role){
     const response = await axiosInstance.post(`/api/jobs/postjob`,{
         title, 
         description, 
         location, 
         requirements, 
         company,
+        Salary,
         role
     })
     return response.data

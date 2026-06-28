@@ -2,7 +2,7 @@ const JobModel = require('../models/Job.model')
 
 async function postJob(req, res) {
     try {
-        const { title, description, location, requirements, company, postedBy } = req.body
+        const { title, description, location, requirements, company, postedBy, Salary } = req.body
 
         if (!title || !description || !location || !requirements || !company) {
             return res.status(400).json({
@@ -16,6 +16,7 @@ async function postJob(req, res) {
             location,
             requirements,
             company,
+            Salary,
             postedBy: req.user._id
         })
 
@@ -58,7 +59,7 @@ async function deleteJobs(req, res) {
     try {
         const jobId = req.params.id
 
-        const job = await JobModel.findByIdAndDelete( jobId )
+        const job = await JobModel.findByIdAndDelete(jobId)
 
         if (!job) {
             return res.status(404).json({

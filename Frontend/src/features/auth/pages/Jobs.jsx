@@ -1,12 +1,15 @@
 import React from 'react'
 import { postJob, getJob, deleteJob } from '../services/jobs.api'
-import { apply } from '../services/apply.api'
+import { apply, getAllApp } from '../services/apply.api'
 import { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
 const Jobs = () => {
     const [jobs, setjobs] = useState([])
     const [loading, setloading] = useState(false)
+    const [applied, setapplied] = useState(false)
+    const [appliedJobs, setAppliedJobs] = useState([])
+
     const { user } = useAuth()
 
     const fetchJobs = useCallback(async () => {
@@ -22,18 +25,48 @@ const Jobs = () => {
         }
     }, [])
 
-    const addJob = async (title, description, location, requirements, company) => {
-        const response = await postJob(title, description, location, requirements, company)
+    const fetchAppliedJobs = useCallback(async () => {
+        if (!user || user.role !== 'Applicant') return
+        try {
+            const response = await getAllApp(user._id)
+            if (response.applications) {
+                const appliedJobIds = response.applications
+                    .filter(app => app.job)
+                    .map(app => app.job._id)
+                setAppliedJobs(appliedJobIds)
+            }
+        } catch (error) {
+            console.log("Error while fetching applied jobs: ", error)
+        }
+    }, [user])
+
+    console.log(user)
+
+    const addJob = async (title, description, location, requirements, company, Salary) => {
+        const response = await postJob(title, description, location, requirements, company, Salary)
         if (response.job) {
             setjobs(prev => [...prev, response.job])
         }
     }
 
-    console.log(user)
-    console.log(user?.role)
     const applyJob = async (id) => {
-        const response = await apply(id)
-        console.log("Applied successfully", response)
+        if (appliedJobs.includes(id)) {
+            alert('Already Applied for that Job')
+            return
+        }
+        try {
+            const response = await apply(id)
+            setAppliedJobs(prev => [...prev, id])
+            console.log("Applied successfully", response)
+            alert('Applied successfully!')
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                alert('Already Applied for that Job')
+            } else {
+                alert(error.response?.data?.message || 'Error applying for job')
+            }
+            console.error("Error applying for job: ", error)
+        }
     }
 
     const removeJob = async (id) => {
@@ -43,30 +76,36 @@ const Jobs = () => {
 
     useEffect(() => {
         fetchJobs()
-    }, [fetchJobs])
+        fetchAppliedJobs()
+    }, [fetchJobs, fetchAppliedJobs])
 
     return (
-        <div className="p-6 bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
+        <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
             {loading && <h1>Loading...</h1>}
-            <div className="grid grid-cols-3 gap-4 ">
+            <div className="grid grid-cols-3 gap-4">
                 {jobs.map((job) => (
                     <div key={job._id} className="border p-4 rounded-lg ">
                         <h2 className="font-bold text-xl text-gray-800 mb-2">{job.title}</h2>
                         <p><span className='text-blue-600 font-semibold mb-1'>Company: </span>{job.company}</p>
                         <p><span className='text-gray-500 text-sm mb-1'>Type: </span>{job.location}</p>
-                        <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
+                        <p><span className='text-gray-600 text-sm mb-1'>Requirements: </span>{job.requirements}</p>
+                        <p><span className='text-green-600 font-semibold mb-4'>Salary: </span>{job.Salary || 'N/A'}</p>
                         {user?.role === 'Applicant' && (
-                            <button onClick={() => applyJob(job._id)} className='p-2 bg-red-500 text-black'>Apply</button>
+                            <button
+                                onClick={() => applyJob(job._id)}
+                                className='p-1 mt-3 rounded-xs font-bold text-white cursor-pointer bg-blue-700'
+                            >
+                                {appliedJobs.includes(job._id) ? "Applied" : "Apply"}
+                            </button>
                         )}
                         {user?.role === 'Recruiter' && (
-                            <button onClick={() => removeJob(job._id)} className='p-2 bg-red-500 text-black'>Delete</button>
+                            <button onClick={() => removeJob(job._id)} className='p-1 mt-3 rounded-xs font-bold text-white bg-red-500 cursor-pointer'>Delete</button>
                         )}
                     </div>
                 ))}
             </div>
         </div>
     )
-
 }
 
 export default Jobs

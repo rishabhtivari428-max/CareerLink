@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { registerUser as registerAPI, loginUser as loginAPI, getMe } from '../services/auth.api'
+import { registerUser as registerAPI, loginUser as loginAPI, getMe, logoutUser as logoutAPI } from '../services/auth.api'
 
 export const AuthContext = createContext()
 
@@ -55,8 +55,20 @@ export function AuthProvider({ children }) {
         initUser();
     }, [])
 
+    const logoutUser = async () => {
+        setloading(true)
+        try {
+            await logoutAPI()
+            setuser(null)
+        } catch (error) {
+            console.log("Error while logging out: ", error)
+        } finally {
+            setloading(false)
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ user, loading, loginUser, registerUser }}>
+        <AuthContext.Provider value={{ user, loading, loginUser, registerUser, logoutUser }}>
             {children}
         </AuthContext.Provider>
     )
