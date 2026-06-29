@@ -4,7 +4,7 @@ async function postJob(req, res) {
     try {
         const { title, description, location, requirements, company, postedBy, Salary } = req.body
 
-        if (!title || !description || !location || !requirements || !company || !Salary) {
+        if (!title || !description || !location || !requirements || !company) {
             return res.status(400).json({
                 message: "All fields are required to post a Job"
             })
@@ -34,7 +34,8 @@ async function postJob(req, res) {
 
 async function getJobs(req, res) {
     try {
-        const job = await JobModel.find({})
+        const jobId = req.params.id
+        const job = await JobModel.find({ jobId })
 
         if (!job) {
             return res.status(404).json({
