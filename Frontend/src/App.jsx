@@ -11,24 +11,23 @@ import ProtectedRoutes from './features/auth/routes/ProtectedRoutes'
 import Midesection from './features/auth/pages/Midesection'
 import FooterCards from './features/auth/pages/FooterCards'
 import Footer from './features/auth/pages/Footer'
-import { Routes, Route, Router } from 'react-router'
+import ViewApplicants from './features/auth/pages/ViewApplicants'
+import { Routes, Route } from 'react-router'
 
 const App = () => {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<> <Home /> <Midesection /> <FooterCards /> <Footer /> </>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/recruiter' element={<ProtectedRoutes> <RecruiterPage /> </ProtectedRoutes>} />
         <Route path='/myapp' element={<ProtectedRoutes> <MyApplications /> </ProtectedRoutes>} />
         <Route path='/postedBy' element={<ProtectedRoutes> <PostJob /> </ProtectedRoutes>} />
         <Route path='/jobs' element={<ProtectedRoutes> <Jobs /> </ProtectedRoutes>} />
+        <Route path='/applicants/:id' element={<ProtectedRoutes><ViewApplicants /></ProtectedRoutes>} />
       </Routes>
-      <Midesection />
-      <FooterCards />
-      <Footer />
     </>
   )
 }

@@ -59,7 +59,6 @@ const Jobs = () => {
                         <p><span className='text-blue-600 font-semibold mb-1'>Company: </span>{job.company}</p>
                         <p><span className='text-gray-500 text-sm mb-1'>Type: </span>{job.location}</p>
                         <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
-                        <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
                         {user?.role === 'Applicant' && (
                             <button
                                 onClick={() => applyJob(job._id)}
