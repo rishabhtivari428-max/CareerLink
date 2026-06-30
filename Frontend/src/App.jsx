@@ -7,6 +7,10 @@ import Jobs from './features/auth/pages/Jobs'
 import PostJob from './features/auth/pages/PostJob'
 import MyApplications from './features/auth/pages/MyApplications'
 import RecruiterPage from './features/auth/pages/RecruiterPage'
+import ProtectedRoutes from './features/auth/routes/ProtectedRoutes'
+import Midesection from './features/auth/pages/Midesection'
+import FooterCards from './features/auth/pages/FooterCards'
+import Footer from './features/auth/pages/Footer'
 import { Routes, Route, Router } from 'react-router'
 
 const App = () => {
@@ -15,13 +19,16 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/recruiter' element={<RecruiterPage />} />
-        <Route path='/myapp' element={<MyApplications />} />
-        <Route path='/postedBy' element={<PostJob />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/jobs' element={<Jobs />} />
+        <Route path='/recruiter' element={<ProtectedRoutes> <RecruiterPage /> </ProtectedRoutes>} />
+        <Route path='/myapp' element={<ProtectedRoutes> <MyApplications /> </ProtectedRoutes>} />
+        <Route path='/postedBy' element={<ProtectedRoutes> <PostJob /> </ProtectedRoutes>} />
+        <Route path='/jobs' element={<ProtectedRoutes> <Jobs /> </ProtectedRoutes>} />
       </Routes>
+      <Midesection />
+      <FooterCards />
+      <Footer />
     </>
   )
 }

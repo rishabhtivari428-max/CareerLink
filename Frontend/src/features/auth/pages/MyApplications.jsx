@@ -6,15 +6,14 @@ const MyApplications = () => {
     const [apps, setapps] = useState([])
     const [loading, setloading] = useState(false)
 
-    const handleFetchJobs = async (e) => {
+    const handleFetchJobs = async (userId) => {
         setloading(true)
         try {
             const response = await getAllApp()
             setapps(response.applications || [])
         } catch (error) {
             console.log("Error while fetching jobs: ", error)
-        }
-        finally {
+        } finally {
             setloading(false)
         }
     }

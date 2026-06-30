@@ -7,7 +7,7 @@ export const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
     const [user, setuser] = useState(null)
-    const [loading, setloading] = useState(false)
+    const [loading, setloading] = useState(true)
 
     const loginUser = async (email, password) => {
         setloading(true)

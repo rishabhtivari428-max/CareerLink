@@ -10,13 +10,13 @@ const Jobs = () => {
     const [applied, setapplied] = useState(false)
     const [appliedJobs, setAppliedJobs] = useState([])
 
-    const { user } = useAuth()
+    const { user, loading: authLoading } = useAuth()
 
     const fetchJobs = useCallback(async () => {
         setloading(true)
         try {
             const response = await getJob()
-            setjobs(response.job || [])
+            setjobs(response.data || [])
         } catch (error) {
             console.log("Error while fetching Jobs: ", error)
         }
@@ -25,7 +25,7 @@ const Jobs = () => {
         }
     }, [])
 
-    console.log(user)
+    if (authLoading) return <h1>Loading...</h1>
 
     const addJob = async (title, description, location, requirements, company) => {
         const response = await postJob(title, description, location, requirements, company)
@@ -58,6 +58,7 @@ const Jobs = () => {
                         <h2 className="font-bold text-xl text-gray-800 mb-2">{job.title}</h2>
                         <p><span className='text-blue-600 font-semibold mb-1'>Company: </span>{job.company}</p>
                         <p><span className='text-gray-500 text-sm mb-1'>Type: </span>{job.location}</p>
+                        <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
                         <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
                         {user?.role === 'Applicant' && (
                             <button

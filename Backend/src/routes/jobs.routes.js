@@ -1,12 +1,14 @@
 const express = require('express')
 const jobRouter = express.Router()
-const { postJob, getJobs, deleteJobs } = require('../controllers/job.controller')
+const { postJob, getJob, deleteJobs } = require('../controllers/job.controller')
 const { identifyUser, authorizeRole } = require('../middleware/auth.middleware')
 
 
 jobRouter.post('/postjob', identifyUser, authorizeRole('Recruiter', 'Admin'), postJob)
 
-jobRouter.get('/getjob', identifyUser, authorizeRole('Recruiter', 'Admin', 'Applicant'), getJobs)
+jobRouter.get('/getjobs', identifyUser, authorizeRole('Recruiter', 'Admin', 'Applicant'), getJob)
+
+jobRouter.get('/getjobs/:id', identifyUser, authorizeRole('Recruiter', 'Admin', 'Applicant'), getJob)
 
 jobRouter.delete('/deletejob/:id', identifyUser, authorizeRole('Recruiter', 'Admin'), deleteJobs)
 

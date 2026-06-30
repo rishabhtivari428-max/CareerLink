@@ -19,7 +19,7 @@ const RecruiterPage = () => {
             e.preventDefault();
         }
         try {
-            const response = await getJob({ title, company, Salary, location, description })
+            const response = await getJob()
             setjobs(response.data || [])
             console.log("Jobs fetched successfully")
         } catch (error) {
@@ -34,6 +34,14 @@ const RecruiterPage = () => {
         try {
             const response = await postJob(title, description, location, requirements, company, Salary, role)
             setjobs(response.data || [])
+            console.log("Job Posted Successfully")
+            alert("Job Posted Successfully")
+            settitle("")
+            setdescription("")
+            setcompany("")
+            setrequirements("")
+            setlocation("")
+            setSalary("")
         } catch (error) {
             console.log("Error while posting job: ", error)
         }
@@ -52,34 +60,29 @@ const RecruiterPage = () => {
                     placeholder='Enter Job Title'
                 />
                 <input type="text"
-                    value={role}
-                    onChange={(e) => setrole(e.target.value)}
-                    placeholder='Enter Role'
-                />
-                <input type="text"
-                    value={company}
-                    onChange={(e) => setcompany(e.target.value)}
-                    placeholder='Enter Company'
-                />
-                <input type="text"
-                    value={Salary}
-                    onChange={(e) => setSalary(e.target.value)}
-                    placeholder='Enter Salary'
-                />
-                <input type="text"
-                    value={requirements}
-                    onChange={(e) => setrequirements(e.target.value)}
-                    placeholder='Enter Requirements'
-                />
-                <input type="text"
                     value={description}
                     onChange={(e) => setdescription(e.target.value)}
-                    placeholder='Enter Description'
+                    placeholder='Enter Job Description'
                 />
                 <input type="text"
                     value={location}
                     onChange={(e) => setlocation(e.target.value)}
-                    placeholder='Enter Location'
+                    placeholder='Enter Job Location'
+                />
+                <input type="text"
+                    value={requirements}
+                    onChange={(e) => setrequirements(e.target.value)}
+                    placeholder='Enter Job Requirements'
+                />
+                <input type="text"
+                    value={company}
+                    onChange={(e) => setcompany(e.target.value)}
+                    placeholder='Enter Company Name'
+                />
+                <input type="text"
+                    value={Salary}
+                    onChange={(e) => setSalary(e.target.value)}
+                    placeholder='Enter Job Salary'
                 />
                 <button type='submit'>Post Job</button>
             </form>
@@ -95,6 +98,7 @@ const RecruiterPage = () => {
                                 <h3 className="font-semibold text-lg text-gray-800">{job.title}</h3>
                                 <p className="text-sm text-gray-500">{job.company} • {job.location}</p>
                                 <p className="text-sm text-gray-600 mt-2">{job.description}</p>
+                                {job.Salary && <p className="text-sm text-gray-600 mt-2">Salary: {job.Salary}</p>}
                             </div>
                         ))}
                     </div>

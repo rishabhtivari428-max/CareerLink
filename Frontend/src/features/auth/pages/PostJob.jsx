@@ -41,9 +41,9 @@ const PostJob = () => {
                 placeholder='Enter Job Description'
             />
             <input type="text"
-                value={company}
-                onChange={(e) => setcompany(e.target.value)}
-                placeholder='Enter Company Name'
+                value={location}
+                onChange={(e) => setlocation(e.target.value)}
+                placeholder='Enter Job Location'
             />
             <input type="text"
                 value={requirements}
@@ -51,9 +51,9 @@ const PostJob = () => {
                 placeholder='Enter Job Requirements'
             />
             <input type="text"
-                value={location}
-                onChange={(e) => setlocation(e.target.value)}
-                placeholder='Enter Job Location'
+                value={company}
+                onChange={(e) => setcompany(e.target.value)}
+                placeholder='Enter Company Name'
             />
             <input type="text"
                 value={Salary}

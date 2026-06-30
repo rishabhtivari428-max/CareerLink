@@ -1,7 +1,7 @@
 const express = require('express')
 const ApplicationRouter = express.Router()
-const {  apply, getMyApplications, getApplicants, updateStatus } = require('../controllers/application.controller')
-const  { identifyUser, authorizeRole }  = require('../middleware/auth.middleware')
+const { apply, getMyApplications, getApplicants, updateStatus } = require('../controllers/application.controller')
+const { identifyUser, authorizeRole } = require('../middleware/auth.middleware')
 
 ApplicationRouter.post('/apply/:id', identifyUser, authorizeRole('Applicant'), apply)
 
