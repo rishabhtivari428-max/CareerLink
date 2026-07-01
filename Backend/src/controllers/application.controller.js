@@ -86,36 +86,52 @@ async function getApplicants(req, res) {
 
 async function updateStatus(req, res) {
     try {
-        const applicationId = req.params.id
-        const { status } = req.body
+        const applicationId = req.params.id;
+        const { status } = req.body;
 
         if (!status) {
             return res.status(400).json({
                 message: "Status is required"
-            })
+            });
+        }
+
+        if (status.toLowerCase() === "rejected") {
+            const deleted = await ApplicationModel.findByIdAndDelete(applicationId);
+
+            if (!deleted) {
+                return res.status(404).json({
+                    message: "Application not found"
+                });
+            }
+
+            return res.status(200).json({
+                message: "Application rejected and removed successfully",
+                isDeleted: true
+            });
         }
 
         const updated = await ApplicationModel.findByIdAndUpdate(
             applicationId,
             { status },
             { new: true }
-        )
+        );
 
         if (!updated) {
             return res.status(404).json({
                 message: "Application not found"
-            })
+            });
         }
 
         return res.status(200).json({
             message: "Status updated successfully",
             updated
-        })
+        });
+
     } catch (error) {
         return res.status(500).json({
             message: "Internal server error",
             error: error.message
-        })
+        });
     }
 }
 

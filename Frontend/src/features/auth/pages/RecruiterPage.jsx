@@ -79,6 +79,7 @@ const RecruiterPage = () => {
                                         <h3 className="font-semibold text-lg text-gray-800">{job.title}</h3>
                                         <p className="text-sm text-gray-500">{job.company} • {job.location}</p>
                                         <p className="text-sm text-gray-600 mt-2">{job.description}</p>
+                                        <p className="text-sm text-gray-600 mt-2">{job.requirements}</p>
                                         {job.Salary && <p className="text-sm text-blue-600 font-medium mt-2">Salary: {job.Salary}</p>}
                                     </div>
                                     <button className="bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium">

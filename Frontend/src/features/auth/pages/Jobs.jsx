@@ -8,6 +8,7 @@ const Jobs = () => {
     const [jobs, setjobs] = useState([])
     const [loading, setloading] = useState(false)
     const [applied, setapplied] = useState(false)
+    const [Salary, setSalary] = useState("")
     const [appliedJobs, setAppliedJobs] = useState([])
 
     const { user, loading: authLoading } = useAuth()
@@ -27,8 +28,8 @@ const Jobs = () => {
 
     if (authLoading) return <h1>Loading...</h1>
 
-    const addJob = async (title, description, location, requirements, company) => {
-        const response = await postJob(title, description, location, requirements, company)
+    const addJob = async (title, description, location, requirements, company, Salary) => {
+        const response = await postJob(title, description, location, requirements, company, Salary)
         if (response.job) {
             setjobs(prev => [...prev, response.job])
         }
@@ -58,7 +59,9 @@ const Jobs = () => {
                         <h2 className="font-bold text-xl text-gray-800 mb-2">{job.title}</h2>
                         <p><span className='text-blue-600 font-semibold mb-1'>Company: </span>{job.company}</p>
                         <p><span className='text-gray-500 text-sm mb-1'>Type: </span>{job.location}</p>
+                        <p><span className='text-gray-500 text-sm mb-1'>Description: </span>{job.description}</p>
                         <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.requirements}</p>
+                        <p><span className='text-gray-600 text-sm mb-4'>Requirements: </span>{job.Salary}</p>
                         {user?.role === 'Applicant' && (
                             <button
                                 onClick={() => applyJob(job._id)}
