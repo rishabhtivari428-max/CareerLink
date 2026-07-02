@@ -9,11 +9,15 @@ const ApplicationRouter = require('./routes/application.routes')
 const app = express()
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://career-link-alpha.vercel.app"],
     credentials: true
 }))
 app.use(express.json())
 app.use(cookieparser())
+
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "CareerLink Backend is Live and Running! 🚀" });
+});
 
 app.use('/api/auth', authRouter)
 app.use('/api/jobs', jobRouter)

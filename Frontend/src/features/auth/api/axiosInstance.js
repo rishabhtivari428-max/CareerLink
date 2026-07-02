@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true 
+    baseURL: "https://careerlink-f40y.onrender.com",
+    withCredentials: true
 })
 
 export default axiosInstance
