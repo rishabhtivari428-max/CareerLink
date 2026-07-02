@@ -9,9 +9,14 @@ const ApplicationRouter = require('./routes/application.routes')
 const app = express()
 
 app.use(cors({
-    origin: "*",
+    origin: [
+        "http://localhost:5173",
+        "https://career-link-alpha.vercel.app",
+        "https://career-link-ey8l-blush.vercel.app"
+    ],
     credentials: true
-}))
+}));
+
 app.use(express.json())
 app.use(cookieparser())
 
