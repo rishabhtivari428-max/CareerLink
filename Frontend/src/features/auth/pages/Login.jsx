@@ -13,11 +13,12 @@ const Login = () => {
         e.preventDefault()
         try {
             await loginUser(email, password)
-            navigate('/jobs')
+            navigate('/')
         } catch (error) {
             console.log("Error while logging you in...", error)
         }
     }
+
     if (loading) {
         return (
             <div className='min-h-screen flex items-center justify-center bg-gray-50'>

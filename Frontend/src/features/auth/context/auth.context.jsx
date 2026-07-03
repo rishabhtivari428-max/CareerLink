@@ -13,11 +13,12 @@ export function AuthProvider({ children }) {
         setloading(true)
         try {
             const response = await loginAPI(email, password)
-            setuser(response.user)
+            await fetchUser()
+
         } catch (error) {
             console.log("Error while logging the user: ", error)
-        }
-        finally {
+            throw error
+        } finally {
             setloading(false)
         }
     }
