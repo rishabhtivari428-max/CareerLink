@@ -60,10 +60,24 @@ const ViewApplicants = () => {
                             <div>
                                 <h3 className="font-bold text-lg">{app.applicant?.[0]?.username || 'Anonymous'}</h3>
                                 <p className="text-gray-600 text-sm">{app.applicant?.[0]?.email || 'No Email Available'}</p>
-                                <span className={`text-xs px-2 py-1 rounded mt-2 inline-block font-semibold ${app.status === 'Selected' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                                    }`}>
-                                    Status: {app.status || 'Pending'}
-                                </span>
+                                {app.applicant?.[0]?.resume ? (
+                                    <a
+                                        href={app.applicant[0].resume}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-xs text-blue-600 font-semibold underline mt-1 inline-block hover:text-blue-800"
+                                    >
+                                        📄 View Resume
+                                    </a>
+                                ) : (
+                                    <p className="text-xs text-gray-400 mt-1 italic">No resume uploaded</p>
+                                )}
+                                <div className="mt-2">
+                                    <span className={`text-xs px-2 py-1 rounded font-semibold ${app.status === 'Selected' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                                        }`}>
+                                        Status: {app.status || 'Pending'}
+                                    </span>
+                                </div>
                             </div>
                             <div className="flex gap-2">
                                 <button

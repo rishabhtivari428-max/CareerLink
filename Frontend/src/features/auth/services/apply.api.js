@@ -21,3 +21,18 @@ export async function update(id, status) {
     })
     return response.data
 }
+
+export const uploadResume = async (file) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('resume', file);
+
+    const res = await axiosInstance.post('/api/resume/upload', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        }
+    });
+
+    return res.data;
+};

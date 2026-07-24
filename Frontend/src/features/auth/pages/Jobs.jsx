@@ -11,7 +11,7 @@ const Jobs = () => {
     const [loading, setloading] = useState(false)
     const [Salary, setSalary] = useState("")
 
-    // 💡 Read from localStorage immediately on load, ignoring the user state delay
+
     const [appliedJobs, setAppliedJobs] = useState(() => {
         const saved = localStorage.getItem('appliedJobs')
         return saved ? JSON.parse(saved) : []

@@ -5,6 +5,7 @@ const cookieparser = require('cookie-parser')
 const authRouter = require('./routes/auth.routes')
 const jobRouter = require('./routes/jobs.routes')
 const ApplicationRouter = require('./routes/application.routes')
+const resumeRouter = require('./routes/resumeRoutes')
 
 const app = express()
 
@@ -27,5 +28,6 @@ app.get("/", (req, res) => {
 app.use('/api/auth', authRouter)
 app.use('/api/jobs', jobRouter)
 app.use('/api/apply', ApplicationRouter)
+app.use('/api/resume', resumeRouter)
 
 module.exports = app

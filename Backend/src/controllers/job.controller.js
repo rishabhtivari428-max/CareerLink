@@ -4,9 +4,9 @@ async function postJob(req, res) {
     try {
         const { title, description, location, requirements, company, Salary } = req.body
 
-        if (!title || !description || !location || !requirements || !company) {
+        if (!title || !description || !location || !requirements || !company || !Salary) {
             return res.status(400).json({
-                message: "All fields are required to post a Job"
+                message: "All fields (title, description, location, requirements, company, Salary) are required to post a Job"
             })
         }
 
@@ -17,14 +17,21 @@ async function postJob(req, res) {
             requirements,
             company,
             Salary,
-            postedBy: req.user._id 
+            postedBy: req.user._id
         })
 
         return res.status(201).json({
             message: "Job posted successfully",
-            data: job 
+            data: job
         })
     } catch (error) {
+        console.log("Post Job Error: ", error)
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({
+                message: "Validation Error: " + error.message,
+                error: error.message
+            });
+        }
         return res.status(500).json({
             message: "Internal server error",
             error: error.message
@@ -47,7 +54,7 @@ async function getJob(req, res) {
             });
         }
 
-        const allJobs = await JobModel.find({}); 
+        const allJobs = await JobModel.find({});
         return res.status(200).json({
             message: "All jobs fetched successfully",
             data: allJobs

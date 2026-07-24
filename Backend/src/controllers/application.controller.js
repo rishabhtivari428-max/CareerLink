@@ -11,7 +11,7 @@ async function apply(req, res) {
             })
         }
 
-        const alreadyApplied = await ApplicationModel.findOne({ job, applicant }).populate('job')
+        const alreadyApplied = await ApplicationModel.findOne({ job, applicant })
         if (alreadyApplied) {
             return res.status(409).json({
                 message: "Already applied for this job"
