@@ -54,7 +54,7 @@ async function getJob(req, res) {
             });
         }
 
-        const allJobs = await JobModel.find({});
+        const allJobs = await JobModel.find({jobId});
         return res.status(200).json({
             message: "All jobs fetched successfully",
             data: allJobs
