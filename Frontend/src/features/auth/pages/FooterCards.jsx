@@ -1,31 +1,60 @@
 import React from 'react'
+import { Search, Zap, Building2, CheckCircle2 } from 'lucide-react'
 
 const FooterCards = () => {
     return (
-        <div className='pt-20 pb-24 bg-gray-50/50 select-none'>
-            <section className='max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center'>
-                <div className='bg-white border border-gray-100 p-8 min-h-[260px] w-full max-w-[360px] rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group'>
-                    <span className='text-3xl bg-blue-50 text-blue-600 p-4 rounded-2xl transition-colors group-hover:bg-blue-600 group-hover:text-white' role="img" aria-label="search">🔍</span>
-                    <h3 className="text-xl pt-5 font-extrabold text-gray-800 font-['Inter']">Smart Job Search</h3>
-                    <p className='text-sm text-gray-500 font-medium mt-3 leading-relaxed'>
-                        Browse curated job listings filtered by role, location, and salary range with ease.
+        <div className="pb-20 select-none">
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Feature 1 */}
+                <div className="bg-white border border-slate-200/90 p-7 rounded-2xl shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col group">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <Search className="w-6 h-6 stroke-[1.8]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                        Smart Job Search
+                    </h3>
+                    <p className="text-sm text-slate-500 font-normal mt-2.5 leading-relaxed">
+                        Explore verified listings filtered by title, company, salary range, and job role with zero clutter.
                     </p>
-                </div>
-                <div className='bg-white border border-gray-100 p-8 min-h-[260px] w-full max-w-[360px] rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group'>
-                    <span className='text-3xl bg-pink-50 text-pink-600 p-4 rounded-2xl transition-colors group-hover:bg-pink-600 group-hover:text-white' role="img" aria-label="rocket">🚀</span>
-                    <h3 className="text-xl pt-5 font-extrabold text-gray-800 font-['Inter']">On-Click Apply</h3>
-                    <p className='text-sm text-gray-500 font-medium mt-3 leading-relaxed'>
-                        Apply to jobs instantly and track every application status in real time.
-                    </p>
-                </div>
-                <div className='bg-white border border-gray-100 p-8 min-h-[260px] w-full max-w-[360px] sm:col-span-2 md:col-span-1 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group'>
-                    <span className='text-3xl bg-teal-50 text-teal-600 p-4 rounded-2xl transition-colors group-hover:bg-teal-600 group-hover:text-white' role="img" aria-label="building">🏢</span>
-                    <h3 className="text-xl pt-5 font-extrabold text-gray-800 font-['Inter']">For Recruiters</h3>
-                    <p className='text-sm text-gray-500 font-medium mt-3 leading-relaxed'>
-                        Post jobs, manage applications, and find the perfect candidate — all in one place.
-                    </p>
+                    <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                        <span>Instant real-time filtering</span>
+                    </div>
                 </div>
 
+                {/* Feature 2 */}
+                <div className="bg-white border border-slate-200/90 p-7 rounded-2xl shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col group">
+                    <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-5 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <Zap className="w-6 h-6 stroke-[1.8]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                        One-Click Apply
+                    </h3>
+                    <p className="text-sm text-slate-500 font-normal mt-2.5 leading-relaxed">
+                        Submit applications instantly. Track interview and evaluation progress live in your personal dashboard.
+                    </p>
+                    <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                        <span>Live application tracking</span>
+                    </div>
+                </div>
+
+                {/* Feature 3 */}
+                <div className="bg-white border border-slate-200/90 p-7 rounded-2xl shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col group">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                        <Building2 className="w-6 h-6 stroke-[1.8]" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900">
+                        For Hiring Recruiters
+                    </h3>
+                    <p className="text-sm text-slate-500 font-normal mt-2.5 leading-relaxed">
+                        Post detailed vacancies in seconds, evaluate applicant profiles, review resumes, and make decisions seamlessly.
+                    </p>
+                    <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-medium text-slate-600">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                        <span>Integrated candidate review</span>
+                    </div>
+                </div>
             </section>
         </div>
     )
